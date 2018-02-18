@@ -1,0 +1,90 @@
+# [Created by task 2.4.4 5/21/2015 20:59:33]
+# Taskwarrior program configuration file.
+# For more documentation, see http://taskwarrior.org or try 'man task', 'man task-color',
+# 'man task-sync' or 'man taskrc'
+
+# Here is an example of entries that use the default, override and blank values
+#   variable=foo   -- By specifying a value, this overrides the default
+#   variable=      -- By specifying no value, this means no default
+#   #variable=foo  -- By commenting out the line, or deleting it, this uses the default
+
+# Use the command 'task show' to see all defaults and overrides
+
+# Files
+data.location=~/.task
+
+# Color theme (uncomment one to use)
+#include ~/.rc/task/colors/light-16.theme
+#include ~/.rc/task/colors/light-256.theme
+#include ~/.rc/task/colors/dark-16.theme
+include ~/.rc/task/colors/dark-256.theme
+#include ~/.rc/task/colors/dark-256-2.theme
+#include ~/.rc/task/colors/dark-red-256.theme
+#include ~/.rc/task/colors/dark-green-256.theme
+#include ~/.rc/task/colors/dark-blue-256.theme
+#include ~/.rc/task/colors/dark-violets-256.theme
+#include ~/.rc/task/colors/dark-yellow-green.theme
+#include ~/.rc/task/colors/dark-gray-256.theme
+#include ~/.rc/task/colors/dark-gray-blue-256.theme
+#include ~/.rc/task/colors/solarized-dark-256.theme
+#include ~/.rc/task/colors/solarized-light-256.theme
+#include ~/.rc/task/colors/no-color.theme
+
+########################################################
+
+# UDA's
+uda.expected.type=duration
+uda.expected.label=Exp
+# urgency.uda.expected.coefficient=2.0
+
+# urgency.uda.priority.H.coefficient=7.0
+# urgency.uda.priority.M.coefficient=4.0
+# urgency.uda.priority.L.coefficient=-10.0
+urgency.uda.priority.H.coefficient=10.0 
+urgency.uda.priority.M.coefficient=7.0 
+urgency.uda.priority.L.coefficient=4.0 
+
+########################################################
+
+# TAGS
+urgency.user.tag.later.coefficient=-10.0
+urgency.user.tag.bcc.coefficient=0.5
+color.tag.contest=color12
+color.tag.bcc=color3
+
+########################################################
+
+# REPORTS
+report.next.labels=ID,Proj,Pri,Due,A,Exp,Urg,Tags,Description
+report.next.columns=id,project,priority,due,start.active,expected,urgency,tags,description
+report.next.sort=urgency-,expected+,due+,priority-,start-,project+
+# report.next.sort=priority-,expected+,urgency-,due+,start-,project+
+
+report.list.columns=id,project,priority,due,start.active,entry.age,expected,description
+report.list.labels=ID,Proj,Pri,Due,Active,Age,Exp,Description
+
+
+report.expected.labels=ID,Exp
+report.expected.columns=id,expected
+report.expected.sort=urgency-,due+,priority-,start-,expected+,project+
+report.expected.filter=status:pending
+
+# report.expected.labels=ID,Exp,Description
+# report.expected.columns=id,expected,description
+
+########################################################
+
+# CONTEXTS
+context.contest=+contest
+context.weekend=+weekend
+context.normal=-contest and -later
+# context.normal=-contest and -later and -reading
+# context.reading=+reading
+
+########################################################
+
+# GENERAL CONFIGURATIONS
+recurrence.limit=1
+# date.iso=no
+
+########################################################

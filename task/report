@@ -1,0 +1,1 @@
+task expected +OVERDUE -ic | awk '$1 ~ /[0-9]+/ { print $1 }' | head -n -1 | xargs -I % task % done

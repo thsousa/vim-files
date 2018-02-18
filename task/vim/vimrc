@@ -1,0 +1,202 @@
+" set rtp=~/.rc/vim/vimfolder,$VIMRUNTIME
+"""""""""""""""""""""""""""""""""""""""VUNDLE"""""""VUNDLE""""""VUNDLE"""""""""""""""""""""""""""""""""""""" 
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+" Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+" Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+" Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Avoid a name conflict with L9
+" Plugin 'user/L9', {'name': 'newL9'}
+
+Plugin 'wesQ3/vim-windowswap'
+Plugin 'godlygeek/tabular'
+" Plugin 'plasticboy/vim-markdown'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'morhetz/gruvbox'
+Plugin 'https://github.com/vim-scripts/DrawIt.git'
+Plugin 'https://github.com/wlangstroth/vim-racket.git'
+Plugin 'https://github.com/jpalardy/vim-slime'
+Plugin 'https://github.com/vim-latex/vim-latex'
+" Plugin 'octol/vim-cpp-enhanced-highlight'
+""""""""""""
+" SNIPPETS "
+" Plugin 'MarcWeber/vim-addon-mw-utils'
+" Plugin 'tomtom/tlib_vim'
+" Plugin 'garbas/vim-snipmate'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+" filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+"""""""""""""""""""""""""""""""""""""""VUNDLE"""""""VUNDLE""""""VUNDLE""""""""""""""""""""""""""""""""""""""
+
+" set expandtab - spaces or tabs?
+" comment: C
+" uncomment: haskell
+set expandtab
+set number
+set tabstop=4
+set shiftwidth=4
+set autoindent
+set noswapfile
+set backupdir=~/.rc/vim/vimfolder/backup
+set laststatus=2
+set foldcolumn=2
+set smartindent
+set nocp
+" conceal
+set cole=0
+set relativenumber
+" set shellcmdflag=-ic
+
+
+" vim-latex
+" let g:Tex_UseMakefile=1
+" let g:Tex_DefaultTargetFormat="pdf"
+let g:Tex_PromptedEnvironments = 'eqnarray*,eqnarray,equation,equation*,\[,proof,align,align*' 
+imap <buffer> <localleader>it <Plug>Tex_InsertItemOnThisLine
+imap <buffer> <leader>it <Plug>Tex_InsertItemOnThisLine
+imap <C-b> <Plug>Tex_MathBF
+imap <C-c> <Plug>Tex_MathCal
+imap <C-l> <Plug>Tex_LeftRight
+autocmd FileType tex
+let g:Tex_CompileRule_dvi = 'make'
+" for breaking text while writing
+set textwidth=73
+let g:pandoc#formatting#textwidth=73
+" editing texts:
+" let g:pandoc#formatting#mode="hA"
+let g:pandoc#formatting#smart_autoformat_on_cursormoved=1
+" sites:
+let g:pandoc#formatting#mode="h"
+
+" This is necessary for windowswap plugin.
+" mapping <leader> to ',' 
+let mapleader=","
+
+filetype plugin on
+let Tlist_Use_Right_Window = 1
+let Tlist_WinWidth = 40
+let OmniCpp_MayCompleteDot = 0
+map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+
+set t_Co=256
+set background=dark
+syntax on
+let g:gruvbox_italic=1
+" colorscheme wombat256mod
+colorscheme gruvbox
+" colorscheme evening
+" colorscheme desert
+" colorscheme wombat256i
+" colorscheme railscasts
+" colorscheme molokai
+
+" set t_ZH=^[[3m
+" set t_ZR=^[[23m
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
+highlight Comment cterm=italic
+let g:pandoc#spell#enabled=0
+
+" Starts NERDTree
+autocmd VimEnter * NERDTree
+" When you start NERDTree, the cursor is in it. The line below moves it into
+" the main window
+autocmd VimEnter * wincmd p
+" Starts Tlist
+autocmd VimEnter * Tlist
+
+" set OmniComplete
+set omnifunc=syntaxcomplete#Complete
+" set omnifunc=javacomplete#Complete
+
+" --- OmniCppComplete ---
+" -- required --
+set nocp " non vi compatible mode
+
+" AAAAAAAAAAAABAIXO -> HASKELLMODE
+"
+" use ghc functionality for haskell files
+" au Bufenter *.hs compiler ghc
+" configure browser for haskell_doc.vim
+" let g:haddock_browser = "/usr/bin/firefox"
+" -- optional --
+" auto close options when exiting insert mode
+"
+" AAAAAAAAAAAAAACIMA -> HASKELLMODE
+
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+set completeopt=menu,menuone
+" -- configs --
+let OmniCpp_MayCompleteDot = 1 " autocomplete with .
+let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
+let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
+let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
+let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e. parameters) in popup window
+" -- ctags --
+" map <ctrl>+F12 to generate ctags for current folder:
+map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>
+" add current directory's generated tags file to available tags
+set tags+=~/.vim/tags/stl3.3.tags
+map! { {}ko
+
+" -------------------------------------------------------------------------------------------------------- "
+"  SHELL SCRIPTING
+
+" On *.html files tab size = 2
+" autocmd BufRead,BufNewFile *.html set shiftwidth=2 | set ts=2
+autocmd BufRead,BufNewFile *.sh call CheckIfShell()
+
+" Sets auto-close 'do' with 'done'
+function AutoCloseDo()
+    map! do dodoneko
+endfunction
+
+" Sets auto-close 'if' with 'fi'
+function AutoCloseIf()
+    map! then thenfiko
+endfunction
+
+function CheckIfShell()
+" Creates a 'map!' to auto-close 'if' with 'fi' and 'do' with 'done'
+" for shell script files.
+    if &filetype == "sh"
+        call AutoCloseDo()
+        call AutoCloseIf()
+    endif
+endfunction

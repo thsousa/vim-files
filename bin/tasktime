@@ -1,0 +1,26 @@
+#!/bin/bash
+
+task $*
+
+# ${ok:=1}
+# for [$cmd in $@]
+# do
+#     if [$cmd = "done" -o $cmd = "modify"]
+#     then $ok = 0
+#     fi
+# done
+
+# ok=1
+# for element in $@; do
+#     echo $element
+#     if [ [$element in ("add", "modify")] ]; 
+#     then
+#         ok = 0
+#         break
+#     fi
+# done
+
+# if [! ("done" in $@) ]
+#     echo "oi"
+
+task expected $* | awk 'BEGIN{s=0} $1 ~ /[0-9]+/ {if ($2 ~ /PT.*/) s = $2 "+" s} END {printf "Expected time: "; system("task calc " s)}'
